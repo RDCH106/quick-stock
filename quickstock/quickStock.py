@@ -67,22 +67,22 @@ class QuickStock:
         self.db.session.commit()
         self.logger.debug("ADD " + repr(stock))
 
-    def getStock(self, id):
-        stock = Stock.query.filter_by(id=id).first()
+    def getStock(self, id_stock):
+        stock = Stock.query.filter_by(id=id_stock).first()
         return stock
 
     def getAllStocks(self):
         stocks = Stock.query.all()
         return stocks
 
-    def updateStock(self, id, name):
-        stock = Stock.query.get(id)
+    def updateStock(self, id_stock, name):
+        stock = Stock.query.get(id_stock)
         stock.name = name
         self.db.session.commit()
         self.logger.debug("UPDATE " + repr(stock))
 
-    def deleteStock(self, id):
-        stock = Stock.query.get(id)
+    def deleteStock(self, id_stock):
+        stock = Stock.query.get(id_stock)
         self.db.session.delete(stock)
         self.db.session.commit()
         self.logger.debug("DELETE " + repr(stock))
@@ -94,16 +94,16 @@ class QuickStock:
         self.db.session.commit()
         self.logger.debug("ADD " + repr(item))
 
-    def getItem(self, id):
-        item = Item.query.filter_by(id=id).first()
+    def getItem(self, id_item):
+        item = Item.query.filter_by(id=id_item).first()
         return item
 
     def getAllStockItems(self, stock_id):
         items = Item.query.filter_by(stock_id=stock_id).all()
         return items
 
-    def updateItem(self, id, name=None, amount=None):
-        item = Item.query.get(id)
+    def updateItem(self, id_item, name=None, amount=None):
+        item = Item.query.get(id_item)
         if name is not None:
             item.name = name
         if name is not None:
@@ -111,8 +111,8 @@ class QuickStock:
         self.db.session.commit()
         self.logger.debug("UPDATE " + repr(item))
 
-    def deleteItem(self, id):
-        item = Item.query.get(id)
+    def deleteItem(self, id_item):
+        item = Item.query.get(id_item)
         self.db.session.delete(item)
         self.db.session.commit()
         self.logger.debug("DELETE " + repr(item))
