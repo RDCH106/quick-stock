@@ -98,6 +98,10 @@ class QuickStock:
         item = Item.query.filter_by(id=id).first()
         return item
 
+    def getAllStockItems(self, stock_id):
+        items = Item.query.filter_by(stock_id=stock_id).all()
+        return items
+
     def updateItem(self, id, name=None, amount=None):
         item = Item.query.get(id)
         if name is not None:
