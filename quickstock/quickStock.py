@@ -94,6 +94,10 @@ class QuickStock:
         self.db.session.commit()
         self.logger.debug("ADD " + repr(item))
 
+    def getItem(self, id):
+        item = Item.query.filter_by(id=id).first()
+        return item
+
     def updateItem(self, id, name=None, amount=None):
         item = Item.query.get(id)
         if name is not None:
