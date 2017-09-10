@@ -67,6 +67,14 @@ class QuickStock:
         self.db.session.commit()
         self.logger.debug("ADD " + repr(stock))
 
+    def getStock(self, id):
+        stock = Stock.query.filter_by(id=id).first()
+        return stock
+
+    def getAllStocks(self):
+        stocks = Stock.query.all()
+        return stocks
+
     def updateStock(self, id, name):
         stock = Stock.query.get(id)
         stock.name = name
