@@ -147,9 +147,3 @@ class Item(QuickStock.db.Model):
 
     def __repr__(self):
         return '<Item %r - %r - %r>' % (self.id, self.name, self.amount)
-
-qs = QuickStock()
-#qs.addStock("Test")
-#qs.addItem("Item", 1, 1)
-
-qs.flushall()
