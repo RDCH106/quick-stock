@@ -1,0 +1,7 @@
+{
+	"app" : {
+		"secretKey" : "Mascando Bits mascandobits.es",
+		"databaseUri" : "sqlite:///db.sqlite",
+		"commitOnTeardown" : true
+	}
+}
