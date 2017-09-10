@@ -101,6 +101,19 @@ class QuickStock:
         self.db.session.commit()
         self.logger.debug("DELETE " + repr(item))
 
+    def flushall(self):
+        Stock.query.delete()
+        Item.query.delete()
+        self.db.session.commit()
+
+    def flushStocks(self):
+        Stock.query.delete()
+        self.db.session.commit()
+
+    def flushItems(self):
+        Item.query.delete()
+        self.db.session.commit()
+
 class Stock(QuickStock.db.Model):
     __tablename__ = "stock"
     id = QuickStock.db.Column(QuickStock.db.Integer, primary_key=True)
@@ -129,4 +142,6 @@ class Item(QuickStock.db.Model):
 
 qs = QuickStock()
 #qs.addStock("Test")
-qs.addItem("Item", 1, 1)
+#qs.addItem("Item", 1, 1)
+
+qs.flushall()
