@@ -61,8 +61,8 @@ class QuickStock:
             print(bcolors.OKBLUE + db_path + bcolors.ENDC)
             self.db.create_all()
 
-    def addStock(self, name):
-        stock = Stock(name)
+    def addStock(self, name, chat):
+        stock = Stock(name, chat)
         self.db.session.add(stock)
         self.db.session.commit()
         self.logger.debug("ADD " + repr(stock))
@@ -134,12 +134,14 @@ class Stock(QuickStock.db.Model):
     __tablename__ = "stock"
     id = QuickStock.db.Column(QuickStock.db.Integer, primary_key=True)
     name = QuickStock.db.Column(QuickStock.db.String(120))
+    chat = QuickStock.db.Column(QuickStock.db.Integer)
 
-    def __init__(self, name):
+    def __init__(self, name, chat):
         self.name = name
+        self.chat = chat
 
     def __repr__(self):
-        return '<Stock %r - %r>' % (self.id, self.name)
+        return '<Stock %r - %r ref: %r>' % (self.id, self.name, self.chat)
 
 class Item(QuickStock.db.Model):
     __tablename__ = "item"

@@ -21,20 +21,21 @@ class TestClassMethods(unittest.TestCase):
 
     def test_addStock(self):
         numItems = len(self.qs.getAllStocks())
-        self.qs.addStock("My Stock")
+        self.qs.addStock("My Stock", 123)
         self.assertLess(numItems, len(self.qs.getAllStocks()))
 
     def test_getStock(self):
-        self.qs.addStock("My Stock")
+        self.qs.addStock("My Stock", 123)
         self.assertEqual("My Stock", self.qs.getStock(1).name)
+        self.assertEqual(123, self.qs.getStock(1).chat)
 
     def test_updateStock(self):
-        self.qs.addStock("My Stock")
+        self.qs.addStock("My Stock", 123)
         self.qs.updateStock(1, "My Stock 2")
         self.assertEqual("My Stock 2", self.qs.getStock(1).name)
 
     def test_deleteStock(self):
-        self.qs.addStock("My Stock")
+        self.qs.addStock("My Stock", 123)
         self.qs.deleteStock(1)
         self.assertIsNone(self.qs.getStock(1))
 
