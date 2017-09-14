@@ -16,8 +16,10 @@ qs = quickStock.QuickStock()
 
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
-def start(bot, update):
-    update.message.reply_text('Hi!')
+#def start(bot, update):
+    #update.message.reply_text('Hi!')
+    #update.message.reply_text(
+    #    'Hi {}!'.format(update.message.from_user.first_name))
 
 
 def help(bot, update):
@@ -33,8 +35,9 @@ def error(bot, update, error):
 
 
 def newStock(bot, update):
-    qs.addStock("My Stock")
-    update.message.reply_text(qs.getAllStocks()[0].name)
+    qs.addStock(update.message.text.split(" ", 1)[1], update.message.chat_id)
+    update.message.reply_text("'%s' created!" % (update.message.text.split(" ", 1)[1]))
+    #update.message.reply_text(qs.getAllStocks()[0].name)
     #update.message.reply_text('newStock')
 
 
@@ -46,8 +49,9 @@ def main():
     dp = updater.dispatcher
 
     # on different commands - answer in Telegram
-    dp.add_handler(CommandHandler("start", start))
+    #dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
+    dp.add_handler(CommandHandler("newStock", newStock))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
