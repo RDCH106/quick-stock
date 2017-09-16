@@ -2,7 +2,7 @@
 
 import logging
 
-from submodules.SimplePythonTools.common import bcolors
+from common import bcolors
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 import os

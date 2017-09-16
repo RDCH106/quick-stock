@@ -8,7 +8,7 @@ Then, the bot is started and runs until we press Ctrl-C on the command line.
 """
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from quickstock import quickStock, common
+import quickStock, common
 
 # Quick Stock logic class
 qs = quickStock.QuickStock()
