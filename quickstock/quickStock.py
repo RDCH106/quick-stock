@@ -102,7 +102,7 @@ class QuickStock:
         item = Item.query.filter_by(id=id_item).first()
         return item
 
-    def getAllStockItems(self, stock_id):
+    def getStockItems(self, stock_id):
         items = Item.query.filter_by(stock_id=stock_id).all()
         return items
 

@@ -18,16 +18,27 @@ class TestClassMethods(unittest.TestCase):
     def setUp(self):
         self.qs = quickStock.QuickStock()
         self.qs.flushStocks()
-        self.qs.addStock("My Stock")
+        self.qs.addStock("My Stock", 123)
         self.qs.flushItems()
 
     def test_addItem(self):
-        numItems = len(self.qs.getAllStockItems(1))
+        numItems = len(self.qs.getStockItems(1))
         self.qs.addItem("Apple", 106, 1)
-        self.assertLess(numItems, len(self.qs.getAllStockItems(1)))
+        self.assertLess(numItems, len(self.qs.getStockItems(1)))
 
     def test_getItem(self):
         self.qs.addItem("Apple", 106, 1)
+        self.assertEqual("Apple", self.qs.getItem(1).name)
+        self.assertEqual(106, self.qs.getItem(1).amount)
+        self.assertEqual(1, self.qs.getItem(1).stock_id)
+
+    def test_getStockItems(self):
+        self.qs.addItem("Apple", 106, 1)
+        self.qs.addItem("Orange", 107, 1)
+        self.assertEqual(2, len(self.qs.getStockItems(1)))
+        self.assertEqual("Apple", self.qs.getItem(1).name)
+        self.assertEqual(106, self.qs.getItem(1).amount)
+        self.assertEqual(1, self.qs.getItem(1).stock_id)
         self.assertEqual("Apple", self.qs.getItem(1).name)
         self.assertEqual(106, self.qs.getItem(1).amount)
         self.assertEqual(1, self.qs.getItem(1).stock_id)
