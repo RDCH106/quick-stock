@@ -9,7 +9,7 @@ Then, the bot is started and runs until we press Ctrl-C on the command line.
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
-from quickstock import quickStock
+from quickstock import quickStock, comon
 
 # Quick Stock logic class
 qs = quickStock.QuickStock()
@@ -40,6 +40,10 @@ def newStock(bot, update):
     #update.message.reply_text(qs.getAllStocks()[0].name)
     #update.message.reply_text('newStock')
 
+def stocks(bot, update):
+    stocks = qs.getChatStocks(update.message.chat_id)
+    update.message.reply_text(comon.stringifySotckToList(stocks))
+
 
 def main():
     # Create the EventHandler and pass it your bot's token.
@@ -52,6 +56,7 @@ def main():
     #dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("newStock", newStock))
+    dp.add_handler(CommandHandler("stocks", stocks))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
