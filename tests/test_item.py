@@ -21,6 +21,9 @@ class TestClassMethods(unittest.TestCase):
         self.qs.addStock("My Stock", 123)
         self.qs.flushItems()
 
+    def tearDown(self):
+        self.qs.flushall()
+
     def test_addItem(self):
         numItems = len(self.qs.getStockItems(1))
         self.qs.addItem("Apple", 106, 1)

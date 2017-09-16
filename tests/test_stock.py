@@ -19,6 +19,9 @@ class TestClassMethods(unittest.TestCase):
         self.qs = quickStock.QuickStock()
         self.qs.flushStocks()
 
+    def tearDown(self):
+        self.qs.flushall()
+
     def test_addStock(self):
         numItems = len(self.qs.getAllStocks())
         self.qs.addStock("My Stock", 123)
