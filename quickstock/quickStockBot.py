@@ -8,17 +8,15 @@ Then, the bot is started and runs until we press Ctrl-C on the command line.
 """
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from quickstock import quickStock, common
+import quickStock, common
 
 # Quick Stock logic class
 qs = quickStock.QuickStock()
 
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
-#def start(bot, update):
-    #update.message.reply_text('Hi!')
-    #update.message.reply_text(
-    #    'Hi {}!'.format(update.message.from_user.first_name))
+def start(bot, update):
+    update.message.reply_text('Hi {}!\nTake a look to /help command for more info'.format(update.message.from_user.first_name))
 
 
 def help(bot, update):
@@ -125,7 +123,7 @@ def main():
     dp = updater.dispatcher
 
     # on different commands - answer in Telegram
-    #dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("newStock", newStock))
     dp.add_handler(CommandHandler("stocks", stocks))
