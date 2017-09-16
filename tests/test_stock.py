@@ -29,6 +29,15 @@ class TestClassMethods(unittest.TestCase):
         self.assertEqual("My Stock", self.qs.getStock(1).name)
         self.assertEqual(123, self.qs.getStock(1).chat)
 
+    def test_getChatStocks(self):
+        self.qs.addStock("My Stock", 123)
+        self.qs.addStock("My Stock 2", 123)
+        self.assertEqual(2, len(self.qs.getChatStocks(123)))
+        self.assertEqual("My Stock", self.qs.getChatStocks(123)[0].name)
+        self.assertEqual(123, self.qs.getChatStocks(123)[0].chat)
+        self.assertEqual("My Stock 2", self.qs.getChatStocks(123)[1].name)
+        self.assertEqual(123, self.qs.getChatStocks(123)[1].chat)
+
     def test_updateStock(self):
         self.qs.addStock("My Stock", 123)
         self.qs.updateStock(1, "My Stock 2")

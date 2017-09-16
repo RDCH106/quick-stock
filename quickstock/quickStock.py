@@ -75,6 +75,10 @@ class QuickStock:
         stocks = Stock.query.all()
         return stocks
 
+    def getChatStocks(self, chat):
+        stocks = Stock.query.filter_by(chat=chat).all()
+        return stocks
+
     def updateStock(self, id_stock, name):
         stock = Stock.query.get(id_stock)
         stock.name = name
