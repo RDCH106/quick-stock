@@ -7,7 +7,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 import os
 import json
-#from quickstock.db import Stock, Item
 
 class QuickStock:
 

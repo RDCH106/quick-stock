@@ -8,7 +8,6 @@ Then, the bot is started and runs until we press Ctrl-C on the command line.
 """
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-import logging
 from quickstock import quickStock, common
 
 # Quick Stock logic class
@@ -41,8 +40,6 @@ def error(bot, update, error):
 def newStock(bot, update):
     qs.addStock(update.message.text.split(" ", 1)[1], update.message.chat_id)
     update.message.reply_text("'%s' created!" % (update.message.text.split(" ", 1)[1]))
-    #update.message.reply_text(qs.getAllStocks()[0].name)
-    #update.message.reply_text('newStock')
 
 
 def stocks(bot, update):
