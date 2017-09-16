@@ -88,6 +88,19 @@ def items(bot, update):
     else:
         update.message.reply_text("ID '%s' invalid!" % (update.message.text.split(" ", 1)[1]))
 
+
+def updateItem(bot, update):
+    stocks = qs.getChatStocks(update.message.chat_id)
+    item = qs.getItem(update.message.text.split(" ", 2)[1])
+    if common.validID(item.stock_id, stocks):
+        if update.message.text.split(" ", 2)[0] == "/updateItemAmount":
+            items = qs.getStockItems(update.message.text.split(" ", 1)[1])
+            qs.updateItem(id_item=update.message.text.split(" ", 2)[1], amount=update.message.text.split(" ", 2)[2])
+            update.message.reply_text("'%s' --> %s updated!" % (item.name,
+                                                                update.message.text.split(" ", 2)[2]))
+    else:
+        update.message.reply_text("ID '%s' invalid!" % (update.message.text.split(" ", 1)[1]))
+
 # -----------------------------------------------------
 
 
@@ -107,6 +120,7 @@ def main():
     dp.add_handler(CommandHandler("deleteStock", deleteStock))
     dp.add_handler(CommandHandler("newItem", newItem))
     dp.add_handler(CommandHandler("items", items))
+    dp.add_handler(CommandHandler("updateItemAmount", updateItem))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
