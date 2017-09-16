@@ -34,15 +34,21 @@ def error(bot, update, error):
     qs.logger.warn('Update "%s" caused error "%s"' % (update, error))
 
 
+# -----------------------------------------------------
+# Stock functions
+# -----------------------------------------------------
+
 def newStock(bot, update):
     qs.addStock(update.message.text.split(" ", 1)[1], update.message.chat_id)
     update.message.reply_text("'%s' created!" % (update.message.text.split(" ", 1)[1]))
     #update.message.reply_text(qs.getAllStocks()[0].name)
     #update.message.reply_text('newStock')
 
+
 def stocks(bot, update):
     stocks = qs.getChatStocks(update.message.chat_id)
     update.message.reply_text(common.stringifySotckToList(stocks))
+
 
 def updateStock(bot, update):
     stocks = qs.getChatStocks(update.message.chat_id)
@@ -51,6 +57,18 @@ def updateStock(bot, update):
         update.message.reply_text("'%s' updated!" % (update.message.text.split(" ", 2)[2]))
     else:
         update.message.reply_text("ID '%s' invalid!" % (update.message.text.split(" ", 1)[1]))
+
+
+def deleteStock(bot, update):
+    stocks = qs.getChatStocks(update.message.chat_id)
+    if common.validID(update.message.text.split(" ", 1)[1], stocks):
+        target = qs.getStock(update.message.text.split(" ", 1)[1]).name
+        qs.deleteStock(update.message.text.split(" ", 1)[1])
+        update.message.reply_text("'%s' deleted!" % target)
+    else:
+        update.message.reply_text("ID '%s' invalid!" % (update.message.text.split(" ", 1)[1]))
+
+# -----------------------------------------------------
 
 
 def main():
@@ -66,6 +84,7 @@ def main():
     dp.add_handler(CommandHandler("newStock", newStock))
     dp.add_handler(CommandHandler("stocks", stocks))
     dp.add_handler(CommandHandler("updateStock", updateStock))
+    dp.add_handler(CommandHandler("deleteStock", deleteStock))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
