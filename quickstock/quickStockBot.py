@@ -77,7 +77,7 @@ def newItem(bot, update):
         update.message.reply_text("'%s' --> %s created!" % (update.message.text.split(" ", 3)[3],
                                                             update.message.text.split(" ", 3)[2]))
     else:
-        update.message.reply_text("ID '%s' invalid!" % (update.message.text.split(" ", 1)[1]))
+        update.message.reply_text("ID '%s' invalid!" % (update.message.text.split(" ", 3)[1]))
 
 
 def items(bot, update):
@@ -92,14 +92,30 @@ def items(bot, update):
 def updateItem(bot, update):
     stocks = qs.getChatStocks(update.message.chat_id)
     item = qs.getItem(update.message.text.split(" ", 2)[1])
-    if common.validID(item.stock_id, stocks):
+    if item is not None and common.validID(item.stock_id, stocks):
         if update.message.text.split(" ", 2)[0] == "/updateItemAmount":
             items = qs.getStockItems(update.message.text.split(" ", 1)[1])
             qs.updateItem(id_item=update.message.text.split(" ", 2)[1], amount=update.message.text.split(" ", 2)[2])
             update.message.reply_text("'%s' --> %s updated!" % (item.name,
                                                                 update.message.text.split(" ", 2)[2]))
+        if update.message.text.split(" ", 2)[0] == "/updateItemName":
+            items = qs.getStockItems(update.message.text.split(" ", 1)[1])
+            qs.updateItem(id_item=update.message.text.split(" ", 2)[1], name=update.message.text.split(" ", 2)[2])
+            update.message.reply_text("'%s' --> %s updated!" % (item.name,
+                                                                update.message.text.split(" ", 2)[2]))
+    else:
+        update.message.reply_text("ID '%s' invalid!" % (update.message.text.split(" ", 2)[1]))
+
+def deleteItem(bot, update):
+    stocks = qs.getChatStocks(update.message.chat_id)
+    item = qs.getItem(update.message.text.split(" ", 1)[1])
+    if item is not None and common.validID(item.stock_id, stocks):
+        target = qs.getItem(update.message.text.split(" ", 1)[1]).name
+        qs.deleteItem(update.message.text.split(" ", 1)[1])
+        update.message.reply_text("'%s' deleted!" % target)
     else:
         update.message.reply_text("ID '%s' invalid!" % (update.message.text.split(" ", 1)[1]))
+
 
 # -----------------------------------------------------
 
@@ -120,7 +136,9 @@ def main():
     dp.add_handler(CommandHandler("deleteStock", deleteStock))
     dp.add_handler(CommandHandler("newItem", newItem))
     dp.add_handler(CommandHandler("items", items))
+    dp.add_handler(CommandHandler("updateItemName", updateItem))
     dp.add_handler(CommandHandler("updateItemAmount", updateItem))
+    dp.add_handler(CommandHandler("deleteItem", deleteItem))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
