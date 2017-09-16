@@ -110,7 +110,7 @@ class QuickStock:
         item = Item.query.get(id_item)
         if name is not None:
             item.name = name
-        if name is not None:
+        if amount is not None:
             item.amount = amount
         self.db.session.commit()
         self.logger.debug("UPDATE " + repr(item))
