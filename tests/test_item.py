@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from quickstock import quickStock
+from quickstock import quickStock, common
 
 class TestClass(unittest.TestCase):
 
@@ -53,6 +53,11 @@ class TestClassMethods(unittest.TestCase):
         self.qs.addItem("Apple", 106, 1)
         self.qs.deleteItem(1)
         self.assertIsNone(self.qs.getItem(1))
+
+    def test_stringifyItemToList(self):
+        self.qs.addItem("Apple", 106, 1)
+        self.qs.addItem("Orange", 107, 1)
+        self.assertEqual("1  Apple 106\n2  Orange 107\n", common.stringifyItemToList(self.qs.getStockItems(1)))
 
 
 if __name__ == '__main__':

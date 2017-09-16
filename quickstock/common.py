@@ -10,7 +10,7 @@ def stringifySotckToList(collection):
 def stringifyItemToList(collection):
     list = ""
     for item in collection:
-        list = list + str(item.id) + "  " + item.name + " " + item.amount + "\n"
+        list = list + str(item.id) + "  " + item.name + " " + str(item.amount) + "\n"
     return list
 
 def validID(id, collection):
