@@ -9,7 +9,7 @@ Then, the bot is started and runs until we press Ctrl-C on the command line.
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
-from quickstock import quickStock, comon
+from quickstock import quickStock, common
 
 # Quick Stock logic class
 qs = quickStock.QuickStock()
@@ -42,7 +42,15 @@ def newStock(bot, update):
 
 def stocks(bot, update):
     stocks = qs.getChatStocks(update.message.chat_id)
-    update.message.reply_text(comon.stringifySotckToList(stocks))
+    update.message.reply_text(common.stringifySotckToList(stocks))
+
+def updateStock(bot, update):
+    stocks = qs.getChatStocks(update.message.chat_id)
+    if common.validID(update.message.text.split(" ", 2)[1], stocks):
+        qs.updateStock(update.message.text.split(" ", 2)[1], update.message.text.split(" ", 2)[2])
+        update.message.reply_text("'%s' updated!" % (update.message.text.split(" ", 2)[2]))
+    else:
+        update.message.reply_text("ID '%s' invalid!" % (update.message.text.split(" ", 1)[1]))
 
 
 def main():
@@ -57,6 +65,7 @@ def main():
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("newStock", newStock))
     dp.add_handler(CommandHandler("stocks", stocks))
+    dp.add_handler(CommandHandler("updateStock", updateStock))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))

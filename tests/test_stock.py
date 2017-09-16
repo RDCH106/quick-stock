@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from quickstock import quickStock, comon
+from quickstock import quickStock, common
 
 class TestClass(unittest.TestCase):
 
@@ -51,7 +51,7 @@ class TestClassMethods(unittest.TestCase):
     def test_stringifySotckToList(self):
         self.qs.addStock("My Stock", 123)
         self.qs.addStock("My Stock 2", 123)
-        self.assertEqual("1  My Stock\n2  My Stock 2\n", comon.stringifySotckToList(self.qs.getChatStocks(123)))
+        self.assertEqual("1  My Stock\n2  My Stock 2\n", common.stringifySotckToList(self.qs.getChatStocks(123)))
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
