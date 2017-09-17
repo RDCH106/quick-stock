@@ -7,6 +7,13 @@ the Dispatcher and registered at their respective places.
 Then, the bot is started and runs until we press Ctrl-C on the command line.
 """
 
+import sys
+
+if sys.version_info < (3, 0):
+    # sys.setdefaultencoding() does not exist, here!
+    reload(sys)  # Reload does the trick!
+    sys.setdefaultencoding('utf-8')
+
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import quickStock, common
 
