@@ -16,6 +16,7 @@ if sys.version_info < (3, 0):
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import quickStock, common
+from help import help_info
 
 # Quick Stock logic class
 qs = quickStock.QuickStock()
@@ -27,7 +28,7 @@ def start(bot, update):
 
 
 def help(bot, update):
-    update.message.reply_text('Help!')
+    update.message.reply_text(help_info)
 
 
 def echo(bot, update):
