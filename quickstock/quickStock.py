@@ -102,7 +102,7 @@ class QuickStock:
         return item
 
     def getStockItems(self, stock_id):
-        items = Item.query.filter_by(stock_id=stock_id).all()
+        items = Item.query.filter_by(stock_id=stock_id).order_by(Item.name.asc()).all()
         return items
 
     def updateItem(self, id_item, name=None, amount=None):
