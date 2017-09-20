@@ -7,8 +7,16 @@ the Dispatcher and registered at their respective places.
 Then, the bot is started and runs until we press Ctrl-C on the command line.
 """
 
+import sys
+
+if sys.version_info < (3, 0):
+    # sys.setdefaultencoding() does not exist, here!
+    reload(sys)  # Reload does the trick!
+    sys.setdefaultencoding('utf-8')
+
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import quickStock, common
+from help import help_info
 
 # Quick Stock logic class
 qs = quickStock.QuickStock()
@@ -20,7 +28,7 @@ def start(bot, update):
 
 
 def help(bot, update):
-    update.message.reply_text('Help!')
+    update.message.reply_text(help_info)
 
 
 def echo(bot, update):
@@ -136,7 +144,7 @@ def main():
     dp.add_handler(CommandHandler("deleteItem", deleteItem))
 
     # on noncommand i.e message - echo the message on Telegram
-    dp.add_handler(MessageHandler(Filters.text, echo))
+    dp.add_handler(MessageHandler([Filters.text], echo))
 
     # log all errors
     dp.add_error_handler(error)
