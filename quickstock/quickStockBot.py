@@ -87,7 +87,7 @@ def items(bot, update):
     stocks = qs.getChatStocks(update.message.chat_id)
     if common.validID(update.message.text.split(" ", 1)[1], stocks):
         items = qs.getStockItems(update.message.text.split(" ", 1)[1])
-        update.message.reply_text(common.stringifyItemToList(items))
+        update.message.reply_text(text=common.stringifyItemToList(items), parse_mode='HTML')
     else:
         update.message.reply_text("ID '%s' invalid!" % (update.message.text.split(" ", 1)[1]))
 

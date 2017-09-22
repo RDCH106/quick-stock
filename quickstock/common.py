@@ -11,10 +11,10 @@ def stringifyItemToList(collection):
     list = ""
     for item in collection:
         if item.amount == 0:
-            list = list + '**{:03d}'.format(item.id) + "  " + item.name + " " + str(item.amount) + "**\n"
+            list = list + '<b>{:03d}'.format(item.id) + "  " + item.name + " " + str(item.amount) + "</b>\n"
         else:
             if item.amount == 1:
-                list = list + '__{:03d}'.format(item.id) + "  " + item.name + " " + str(item.amount) + "__\n"
+                list = list + '<i>{:03d}'.format(item.id) + "  " + item.name + " " + str(item.amount) + "</i>\n"
             else:
                 list = list + '{:03d}'.format(item.id) + "  " + item.name + " " + str(item.amount) + "\n"
     return list
