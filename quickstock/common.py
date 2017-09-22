@@ -14,7 +14,7 @@ def stringifyItemToList(collection):
             list = list + '<b>{:03d}'.format(item.id) + "  " + item.name + " " + str(item.amount) + "</b>\n"
         else:
             if item.amount == 1:
-                list = list + '<pre>{:03d}'.format(item.id) + "  " + item.name + " " + str(item.amount) + "</pre>\n"
+                list = list + '<code>{:03d}'.format(item.id) + "  " + item.name + " " + str(item.amount) + "</code>\n"
             else:
                 list = list + '{:03d}'.format(item.id) + "  " + item.name + " " + str(item.amount) + "\n"
     return list
