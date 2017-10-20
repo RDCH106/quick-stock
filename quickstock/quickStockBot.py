@@ -98,9 +98,17 @@ def updateItem(bot, update):
     if item is not None and common.validID(item.stock_id, stocks):
         if update.message.text.split(" ", 2)[0] == "/updateItemAmount":
             items = qs.getStockItems(update.message.text.split(" ", 1)[1])
-            qs.updateItem(id_item=update.message.text.split(" ", 2)[1], amount=update.message.text.split(" ", 2)[2])
-            update.message.reply_text("'%s' --> %s updated!" % (item.name,
-                                                                update.message.text.split(" ", 2)[2]))
+            if update.message.text.split(" ", 2)[2][0] == "+" or update.message.text.split(" ", 2)[2][0] == "-":
+                amount = qs.getItem(update.message.text.split(" ", 2)[1]).amount
+                qs.updateItem(id_item=update.message.text.split(" ", 2)[1],
+                              amount=amount + int(update.message.text.split(" ", 2)[2]))
+                update.message.reply_text("'%s' --> %s updated!" % (item.name,
+                                                                    str(amount)+update.message.text.split(" ", 2)[2]))
+            else:
+                qs.updateItem(id_item=update.message.text.split(" ", 2)[1], amount=update.message.text.split(" ", 2)[2])
+                update.message.reply_text("'%s' --> %s updated!" % (item.name,
+                                                                    update.message.text.split(" ", 2)[2]))
+
         if update.message.text.split(" ", 2)[0] == "/updateItemName":
             items = qs.getStockItems(update.message.text.split(" ", 1)[1])
             qs.updateItem(id_item=update.message.text.split(" ", 2)[1], name=update.message.text.split(" ", 2)[2])
