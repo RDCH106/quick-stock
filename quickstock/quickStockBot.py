@@ -28,7 +28,7 @@ def start(bot, update):
 
 
 def help(bot, update):
-    update.message.reply_text(help_info)
+    update.message.reply_text(help_info, parse_mode='HTML')
 
 
 def echo(bot, update):
