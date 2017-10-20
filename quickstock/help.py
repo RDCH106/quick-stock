@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-help_info = """Quick Stock commands
+help_info = """<b>👁️‍🗨️ Quick Stock commands</b>
 
 /newStock stock_name
    Create new Stock
@@ -17,6 +17,10 @@ help_info = """Quick Stock commands
    List created stock items
 /updateItemAmount item_id item_amount
    Update item amount
+/updateItemAmount item_id <b>+</b>item_amount
+   Add item amount
+/updateItemAmount item_id <b>-</b>item_amount
+   Subtract item amount
 /updateItemName item_id item_name
    Update item name
 /deleteItem item_id
