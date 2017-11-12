@@ -24,7 +24,7 @@ Any bot in Telegram needs an **Access Token**. To generate it, you have to talk 
 
 ``` json
 "bot" : {
-		"token" : "Bot_token"
+    "token" : "Bot_token"
 }
 ```
 
