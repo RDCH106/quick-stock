@@ -7,3 +7,13 @@
 Telegram bot for stock management 
 
 Now in develop.... 🛠️
+
+### Installation
+
+You can install from source with:
+
+```
+$ git clone https://github.com/RDCH106/quick-stock.git --recursive
+$ cd quick-stock
+$ pip install -r requirements.txt
+```
