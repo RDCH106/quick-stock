@@ -3,7 +3,7 @@
 help_info = """<b>👁️‍🗨️ Quick Stock commands</b>
 
 /newStock stock_name
-   Create new Stock
+   Create new stock
 /stocks
    List created stocks
 /updateStock stock_id stock_name

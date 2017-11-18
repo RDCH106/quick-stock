@@ -1,0 +1,10 @@
+help - Help
+newstock - Create new stock
+stocks - List created stocks
+updatestock - Update stock name
+deletestock - Delete stock
+newitem - Create new stock item
+items - List created stock items
+updateitemamount - Update item amount
+updateitemname - Update item name
+deleteitem - Delete item
